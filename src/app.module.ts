@@ -23,11 +23,11 @@ dotenv.config();
         return {
           type: 'mysql',
     //host: 'localhost',
-    host : process.env.DB_HOST,
-    port: 3307,
-    username: 'root',
-    password: '',
-    database: 'billing',
+  host :configService.get<string>('DB_HOST'),
+      port: configService.get<number>('DB_PORT'),
+      username: configService.get<string>('DB_USERNAME'),
+      password: configService.get<string>('DB_PASSWORD'),
+      database: configService.get<string>('DB_NAME'),
     entities: [Payment],
     synchronize: true,  //
         };

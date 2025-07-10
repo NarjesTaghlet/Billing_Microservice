@@ -17,6 +17,6 @@ export class Payment {
   @Column()
   stripeSessionId: string;
 
-  @CreateDateColumn()
-  createdAt: Date;
+    @CreateDateColumn()
+    createdAt: Date;
 }

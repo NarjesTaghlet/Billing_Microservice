@@ -287,8 +287,11 @@ export class BillingService {
 
 
    async updateSubscriptionInUserService(userId: number, plan: string): Promise<Subscription> {
+
+        const userServiceUrl = process.env.USER_SERVICE_URL || 'http://localhost:3030';
+
     const response = await firstValueFrom(
-      this.httpService.put(`http://localhost:3030/user/${userId}/subscription`, {
+      this.httpService.put(`${userServiceUrl}/user/${userId}/subscription`, {
         plan,
         status: 'active',
       }),
