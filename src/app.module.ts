@@ -4,7 +4,6 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-
 import * as dotenv from 'dotenv';
 import { BillingModule } from './billing/billing.module';
 import { Payment } from './billing/entities/payment.entity';
@@ -19,7 +18,7 @@ dotenv.config();
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => {
-        console.log('SECRET_KEY in TypeOrm config:', process.env.SECRET_KEY); // Debug
+      //console.log('SECRET_KEY in TypeOrm config:', process.env.SECRET_KEY); // Debug
         return {
           type: 'mysql',
     //host: 'localhost',
@@ -41,6 +40,6 @@ dotenv.config();
 })
 export class AppModule {
   constructor(configService: ConfigService) {
-    console.log('SECRET_KEY in AppModule:', process.env.SECRET_KEY); // Debug
+ //   console.log('SECRET_KEY in AppModule:', process.env.SECRET_KEY); // Debug
   }
 }

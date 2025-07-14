@@ -59,6 +59,7 @@ import { firstValueFrom } from 'rxjs';
 import { Payment } from './entities/payment.entity';
 import { CostExplorerClient, GetCostAndUsageCommand } from '@aws-sdk/client-cost-explorer';
 import Stripe from 'stripe';
+import { ConfigService } from '@nestjs/config';
 import * as dotenv from 'dotenv' ;
 dotenv.config();
 
@@ -77,13 +78,15 @@ export class BillingService {
     @InjectRepository(Payment)
     private paymentRepository: Repository<Payment>,
     private httpService: HttpService,
+    private readonly configService: ConfigService
   ) {}
 
 
       async fetchTempCredentials(userId: number) {
   try {
     // Utilise une variable d'environnement pour l'URL du user-service
-    const userServiceUrl = process.env.USER_SERVICE_URL || 'http://localhost:3030';
+    const userServiceUrl = this.configService.get<string>('USER_SERVICE_URL', 'http://localhost:3030');
+
     const { data } = await firstValueFrom(
       this.httpService.post(`${userServiceUrl}/user/${userId}/connect-aws`, {})
     );
