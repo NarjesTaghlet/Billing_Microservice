@@ -71,15 +71,24 @@ interface Subscription {
 
 @Injectable()
 export class BillingService {
-  private readonly stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: '2025-05-28.basil' });
+    private readonly stripe: Stripe;
+
   private readonly costExplorerClient = new CostExplorerClient({ region: 'us-east-1' });
+
+  
 
   constructor(
     @InjectRepository(Payment)
     private paymentRepository: Repository<Payment>,
     private httpService: HttpService,
     private readonly configService: ConfigService
-  ) {}
+  ) {
+    const stripeSecret = this.configService.get<string>('STRIPE_SECRET_KEY');
+    this.stripe = new Stripe(stripeSecret, {
+      apiVersion: '2025-05-28.basil',
+    });
+  
+  }
 
 
       async fetchTempCredentials(userId: number) {
@@ -291,7 +300,8 @@ export class BillingService {
 
    async updateSubscriptionInUserService(userId: number, plan: string): Promise<Subscription> {
 
-        const userServiceUrl = process.env.USER_SERVICE_URL || 'http://localhost:3030';
+        const userServiceUrl = this.configService.get<string>('USER_SERVICE_URL', 'http://localhost:3030');
+
 
     const response = await firstValueFrom(
       this.httpService.put(`${userServiceUrl}/user/${userId}/subscription`, {
