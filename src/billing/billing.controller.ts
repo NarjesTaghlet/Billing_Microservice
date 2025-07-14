@@ -160,7 +160,7 @@ async checkAlert(@Request () req , @Body() body : any ): Promise<{ alert: boolea
   }
 }
   */
-import { Buffer } from 'buffer/';  // Ajoutez un slash à la fin
+import { Buffer } from 'buffer';  // Ajoutez un slash à la fin
 
 import {
   Controller,

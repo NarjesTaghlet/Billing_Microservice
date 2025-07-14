@@ -30,6 +30,7 @@
     "@nestjs/platform-express": "^10.0.0",
     "@nestjs/typeorm": "^11.0.0",
     "axios": "^1.9.0",
+    "buffer": "^6.0.3",
     "iconv-lite": "^0.6.3",
     "iterare": "^1.2.1",
     "mysql2": "^3.14.0",
