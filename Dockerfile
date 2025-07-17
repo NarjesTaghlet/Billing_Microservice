@@ -1,4 +1,4 @@
-FROM node:18-alpine
+FROM node:22-alpine
 
 
 # Set working directory
@@ -11,9 +11,6 @@ RUN npm i --save-dev @types/node --legacy-peer-deps
 RUN npm install -g @nestjs/cli --legacy-peer-deps 
 
 RUN npm install --legacy-peer-deps 
-
-
-
 
 # Install production dependencies and clean npm cache to reduce image size
 RUN npm ci --production  --legacy-peer-deps  && npm cache clean --force
@@ -29,7 +26,7 @@ RUN npm run build
 #USER appuser
 
 # Expose port
-EXPOSE 3001
+EXPOSE 3031
 
 # Start the application
 CMD ["node", "dist/main.js"]
