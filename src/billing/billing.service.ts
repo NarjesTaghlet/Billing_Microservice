@@ -112,11 +112,11 @@ export class BillingService {
 
   switch (plan) {
     case 'medium':
-      limit = 100;
+      limit = 500;
       break;
     case 'small':
     default:
-      limit = 50;
+      limit = 80;
       break;
   }
 
@@ -226,7 +226,7 @@ export class BillingService {
 
       console.log(plan)
       // Fetch or create subscription = > correct 
-      const planAmount = plan === 'medium' ? 100 : 50; // $100 or $50 in cents
+      const planAmount = plan === 'medium' ? 500 : 80; // $100 or $50 in cents
       const subAccountId = await this.getAwsSubAccountId(userId);
 
       console.log(subAccountId)
