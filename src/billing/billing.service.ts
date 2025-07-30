@@ -147,7 +147,7 @@ export class BillingService {
         throw new HttpException(`Invalid plan: ${plan}`, HttpStatus.BAD_REQUEST);
       }
 
-      const planAmount = normalizedPlan === 'medium' ? 10000 : 5000; // $100 or $50 in cents
+      const planAmount = normalizedPlan === 'medium' ? 50000 : 8000; // $500 or $80 in cents
       console.log(`🔹 Plan amount: $${planAmount / 100}`);
 
         // Get AWS sub-account ID
